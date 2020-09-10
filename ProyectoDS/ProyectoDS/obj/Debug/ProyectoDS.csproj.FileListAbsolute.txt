@@ -1,0 +1,17 @@
+C:\Users\ASUS\source\repos\ProyectoDS\ProyectoDS\bin\Debug\ProyectoDS.exe.config
+C:\Users\ASUS\source\repos\ProyectoDS\ProyectoDS\bin\Debug\ProyectoDS.exe
+C:\Users\ASUS\source\repos\ProyectoDS\ProyectoDS\bin\Debug\ProyectoDS.pdb
+C:\Users\ASUS\source\repos\ProyectoDS\ProyectoDS\obj\Debug\ProyectoDS.csprojAssemblyReference.cache
+C:\Users\ASUS\source\repos\ProyectoDS\ProyectoDS\obj\Debug\MainWindow.g.cs
+C:\Users\ASUS\source\repos\ProyectoDS\ProyectoDS\obj\Debug\App.g.cs
+C:\Users\ASUS\source\repos\ProyectoDS\ProyectoDS\obj\Debug\ProyectoDS_MarkupCompile.cache
+C:\Users\ASUS\source\repos\ProyectoDS\ProyectoDS\obj\Debug\ProyectoDS_MarkupCompile.lref
+C:\Users\ASUS\source\repos\ProyectoDS\ProyectoDS\obj\Debug\MainWindow.baml
+C:\Users\ASUS\source\repos\ProyectoDS\ProyectoDS\obj\Debug\ProyectoDS.g.resources
+C:\Users\ASUS\source\repos\ProyectoDS\ProyectoDS\obj\Debug\ProyectoDS.Properties.Resources.resources
+C:\Users\ASUS\source\repos\ProyectoDS\ProyectoDS\obj\Debug\ProyectoDS.csproj.GenerateResource.cache
+C:\Users\ASUS\source\repos\ProyectoDS\ProyectoDS\obj\Debug\ProyectoDS.csproj.CoreCompileInputs.cache
+C:\Users\ASUS\source\repos\ProyectoDS\ProyectoDS\obj\Debug\ProyectoDS.exe
+C:\Users\ASUS\source\repos\ProyectoDS\ProyectoDS\obj\Debug\ProyectoDS.pdb
+C:\Users\ASUS\source\repos\ProyectoDS\ProyectoDS\obj\Debug\Agenta.g.cs
+C:\Users\ASUS\source\repos\ProyectoDS\ProyectoDS\obj\Debug\Agenta.baml
