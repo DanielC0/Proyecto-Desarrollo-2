@@ -1,0 +1,767 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="AcmeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Administrador">
+          <Key>
+            <PropertyRef Name="idAdmin" />
+          </Key>
+          <Property Name="idAdmin" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="documento" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cargo">
+          <Key>
+            <PropertyRef Name="codigoCargo" />
+          </Key>
+          <Property Name="codigoCargo" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="nombreCargo" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Cita">
+          <Key>
+            <PropertyRef Name="codigo" />
+          </Key>
+          <Property Name="codigo" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="documentoPaciente" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="idOdontologo" Type="int" Nullable="false" />
+          <Property Name="fecha" Type="nchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Empleado">
+          <Key>
+            <PropertyRef Name="documento" />
+          </Key>
+          <Property Name="documento" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="tipoDocumento" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="nombre" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="correo" Type="nchar" MaxLength="50" />
+          <Property Name="telefono" Type="nchar" MaxLength="10" />
+          <Property Name="fechaNacimiento" Type="datetime" />
+          <Property Name="codigoCargo" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="contrasena" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Factura">
+          <Key>
+            <PropertyRef Name="codigo" />
+          </Key>
+          <Property Name="codigo" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="documentoPaciente" Type="nchar" MaxLength="10" />
+          <Property Name="idProcedimiento" Type="int" />
+          <Property Name="fecha" Type="nchar" MaxLength="10" />
+          <Property Name="valorTotal" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Historia_clinica">
+          <Key>
+            <PropertyRef Name="idHistoria" />
+          </Key>
+          <Property Name="idHistoria" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="documentoPaciente" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="codigoProcedimiento" Type="nchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Odontologo">
+          <Key>
+            <PropertyRef Name="idOdontologo" />
+          </Key>
+          <Property Name="idOdontologo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="documento" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="descripcion" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="especialidad" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Paciente">
+          <Key>
+            <PropertyRef Name="documento" />
+          </Key>
+          <Property Name="documento" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="nombre" Type="nchar" MaxLength="50" />
+          <Property Name="tipoDocumento" Type="nchar" MaxLength="10" />
+          <Property Name="correo" Type="nchar" MaxLength="20" />
+          <Property Name="telefono" Type="nchar" MaxLength="10" />
+          <Property Name="tipoSangre" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Procedimiento">
+          <Key>
+            <PropertyRef Name="codigo" />
+          </Key>
+          <Property Name="codigo" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="nombre" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="precio" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="descripcion" Type="nchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Procedimientos_realizados">
+          <Key>
+            <PropertyRef Name="idProcedimiento" />
+          </Key>
+          <Property Name="idProcedimiento" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="codigoProcedimiento" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="codigoFactura" Type="nchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Secretaria">
+          <Key>
+            <PropertyRef Name="idSecretaria" />
+          </Key>
+          <Property Name="idSecretaria" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="documento" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <Association Name="FK_Administrador_Empleado">
+          <End Role="Empleado" Type="Self.Empleado" Multiplicity="1" />
+          <End Role="Administrador" Type="Self.Administrador" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleado">
+              <PropertyRef Name="documento" />
+            </Principal>
+            <Dependent Role="Administrador">
+              <PropertyRef Name="documento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cita_Odontologo">
+          <End Role="Odontologo" Type="Self.Odontologo" Multiplicity="1" />
+          <End Role="Cita" Type="Self.Cita" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Odontologo">
+              <PropertyRef Name="idOdontologo" />
+            </Principal>
+            <Dependent Role="Cita">
+              <PropertyRef Name="idOdontologo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cita_Paciente">
+          <End Role="Paciente" Type="Self.Paciente" Multiplicity="1" />
+          <End Role="Cita" Type="Self.Cita" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Paciente">
+              <PropertyRef Name="documento" />
+            </Principal>
+            <Dependent Role="Cita">
+              <PropertyRef Name="documentoPaciente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Empleado_Cargo">
+          <End Role="Cargo" Type="Self.Cargo" Multiplicity="1" />
+          <End Role="Empleado" Type="Self.Empleado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cargo">
+              <PropertyRef Name="codigoCargo" />
+            </Principal>
+            <Dependent Role="Empleado">
+              <PropertyRef Name="codigoCargo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Factura_Paciente">
+          <End Role="Paciente" Type="Self.Paciente" Multiplicity="0..1" />
+          <End Role="Factura" Type="Self.Factura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Paciente">
+              <PropertyRef Name="documento" />
+            </Principal>
+            <Dependent Role="Factura">
+              <PropertyRef Name="documentoPaciente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Factura_Procedimientos_realizados">
+          <End Role="Procedimientos_realizados" Type="Self.Procedimientos_realizados" Multiplicity="0..1" />
+          <End Role="Factura" Type="Self.Factura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Procedimientos_realizados">
+              <PropertyRef Name="idProcedimiento" />
+            </Principal>
+            <Dependent Role="Factura">
+              <PropertyRef Name="idProcedimiento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Historia_clinica_Paciente">
+          <End Role="Paciente" Type="Self.Paciente" Multiplicity="1" />
+          <End Role="Historia_clinica" Type="Self.Historia_clinica" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Paciente">
+              <PropertyRef Name="documento" />
+            </Principal>
+            <Dependent Role="Historia_clinica">
+              <PropertyRef Name="documentoPaciente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Historia_clinica_Procedimiento">
+          <End Role="Procedimiento" Type="Self.Procedimiento" Multiplicity="1" />
+          <End Role="Historia_clinica" Type="Self.Historia_clinica" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Procedimiento">
+              <PropertyRef Name="codigo" />
+            </Principal>
+            <Dependent Role="Historia_clinica">
+              <PropertyRef Name="codigoProcedimiento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Odontologo_Empleado">
+          <End Role="Empleado" Type="Self.Empleado" Multiplicity="1" />
+          <End Role="Odontologo" Type="Self.Odontologo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleado">
+              <PropertyRef Name="documento" />
+            </Principal>
+            <Dependent Role="Odontologo">
+              <PropertyRef Name="documento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Secretaria_Empleado">
+          <End Role="Empleado" Type="Self.Empleado" Multiplicity="1" />
+          <End Role="Secretaria" Type="Self.Secretaria" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleado">
+              <PropertyRef Name="documento" />
+            </Principal>
+            <Dependent Role="Secretaria">
+              <PropertyRef Name="documento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="obtener_especialidad" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="AcmeModelStoreContainer">
+          <EntitySet Name="Administrador" EntityType="Self.Administrador" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cargo" EntityType="Self.Cargo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cita" EntityType="Self.Cita" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Empleado" EntityType="Self.Empleado" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Factura" EntityType="Self.Factura" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Historia_clinica" EntityType="Self.Historia_clinica" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Odontologo" EntityType="Self.Odontologo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Paciente" EntityType="Self.Paciente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Procedimiento" EntityType="Self.Procedimiento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Procedimientos_realizados" EntityType="Self.Procedimientos_realizados" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Secretaria" EntityType="Self.Secretaria" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Administrador_Empleado" Association="Self.FK_Administrador_Empleado">
+            <End Role="Empleado" EntitySet="Empleado" />
+            <End Role="Administrador" EntitySet="Administrador" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cita_Odontologo" Association="Self.FK_Cita_Odontologo">
+            <End Role="Odontologo" EntitySet="Odontologo" />
+            <End Role="Cita" EntitySet="Cita" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cita_Paciente" Association="Self.FK_Cita_Paciente">
+            <End Role="Paciente" EntitySet="Paciente" />
+            <End Role="Cita" EntitySet="Cita" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Empleado_Cargo" Association="Self.FK_Empleado_Cargo">
+            <End Role="Cargo" EntitySet="Cargo" />
+            <End Role="Empleado" EntitySet="Empleado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Factura_Paciente" Association="Self.FK_Factura_Paciente">
+            <End Role="Paciente" EntitySet="Paciente" />
+            <End Role="Factura" EntitySet="Factura" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Factura_Procedimientos_realizados" Association="Self.FK_Factura_Procedimientos_realizados">
+            <End Role="Procedimientos_realizados" EntitySet="Procedimientos_realizados" />
+            <End Role="Factura" EntitySet="Factura" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Historia_clinica_Paciente" Association="Self.FK_Historia_clinica_Paciente">
+            <End Role="Paciente" EntitySet="Paciente" />
+            <End Role="Historia_clinica" EntitySet="Historia_clinica" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Historia_clinica_Procedimiento" Association="Self.FK_Historia_clinica_Procedimiento">
+            <End Role="Procedimiento" EntitySet="Procedimiento" />
+            <End Role="Historia_clinica" EntitySet="Historia_clinica" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Odontologo_Empleado" Association="Self.FK_Odontologo_Empleado">
+            <End Role="Empleado" EntitySet="Empleado" />
+            <End Role="Odontologo" EntitySet="Odontologo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Secretaria_Empleado" Association="Self.FK_Secretaria_Empleado">
+            <End Role="Empleado" EntitySet="Empleado" />
+            <End Role="Secretaria" EntitySet="Secretaria" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="AcmeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Administrador">
+          <Key>
+            <PropertyRef Name="idAdmin" />
+          </Key>
+          <Property Name="idAdmin" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="documento" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Empleado" Relationship="Self.FK_Administrador_Empleado" FromRole="Administrador" ToRole="Empleado" />
+        </EntityType>
+        <EntityType Name="Cargo">
+          <Key>
+            <PropertyRef Name="codigoCargo" />
+          </Key>
+          <Property Name="codigoCargo" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="nombreCargo" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Empleado" Relationship="Self.FK_Empleado_Cargo" FromRole="Cargo" ToRole="Empleado" />
+        </EntityType>
+        <EntityType Name="Cita">
+          <Key>
+            <PropertyRef Name="codigo" />
+          </Key>
+          <Property Name="codigo" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="documentoPaciente" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="idOdontologo" Type="Int32" Nullable="false" />
+          <Property Name="fecha" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Odontologo" Relationship="Self.FK_Cita_Odontologo" FromRole="Cita" ToRole="Odontologo" />
+          <NavigationProperty Name="Paciente" Relationship="Self.FK_Cita_Paciente" FromRole="Cita" ToRole="Paciente" />
+        </EntityType>
+        <EntityType Name="Empleado">
+          <Key>
+            <PropertyRef Name="documento" />
+          </Key>
+          <Property Name="documento" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="tipoDocumento" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nombre" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="correo" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="telefono" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="fechaNacimiento" Type="DateTime" Precision="3" />
+          <Property Name="codigoCargo" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="contrasena" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Administrador" Relationship="Self.FK_Administrador_Empleado" FromRole="Empleado" ToRole="Administrador" />
+          <NavigationProperty Name="Cargo" Relationship="Self.FK_Empleado_Cargo" FromRole="Empleado" ToRole="Cargo" />
+          <NavigationProperty Name="Odontologo" Relationship="Self.FK_Odontologo_Empleado" FromRole="Empleado" ToRole="Odontologo" />
+          <NavigationProperty Name="Secretaria" Relationship="Self.FK_Secretaria_Empleado" FromRole="Empleado" ToRole="Secretaria" />
+        </EntityType>
+        <EntityType Name="Factura">
+          <Key>
+            <PropertyRef Name="codigo" />
+          </Key>
+          <Property Name="codigo" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="documentoPaciente" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="idProcedimiento" Type="Int32" />
+          <Property Name="fecha" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="valorTotal" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Paciente" Relationship="Self.FK_Factura_Paciente" FromRole="Factura" ToRole="Paciente" />
+          <NavigationProperty Name="Procedimientos_realizados" Relationship="Self.FK_Factura_Procedimientos_realizados" FromRole="Factura" ToRole="Procedimientos_realizados" />
+        </EntityType>
+        <EntityType Name="Historia_clinica">
+          <Key>
+            <PropertyRef Name="idHistoria" />
+          </Key>
+          <Property Name="idHistoria" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="documentoPaciente" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="codigoProcedimiento" Type="String" Nullable="false" MaxLength="10" Unicode="true" FixedLength="true" />
+          <NavigationProperty Name="Paciente" Relationship="Self.FK_Historia_clinica_Paciente" FromRole="Historia_clinica" ToRole="Paciente" />
+          <NavigationProperty Name="Procedimiento" Relationship="Self.FK_Historia_clinica_Procedimiento" FromRole="Historia_clinica" ToRole="Procedimiento" />
+        </EntityType>
+        <EntityType Name="Odontologo">
+          <Key>
+            <PropertyRef Name="idOdontologo" />
+          </Key>
+          <Property Name="idOdontologo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="documento" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="especialidad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Cita" Relationship="Self.FK_Cita_Odontologo" FromRole="Odontologo" ToRole="Cita" />
+          <NavigationProperty Name="Empleado" Relationship="Self.FK_Odontologo_Empleado" FromRole="Odontologo" ToRole="Empleado" />
+        </EntityType>
+        <EntityType Name="Paciente">
+          <Key>
+            <PropertyRef Name="documento" />
+          </Key>
+          <Property Name="documento" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="tipoDocumento" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="correo" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="telefono" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="tipoSangre" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Cita" Relationship="Self.FK_Cita_Paciente" FromRole="Paciente" ToRole="Cita" />
+          <NavigationProperty Name="Factura" Relationship="Self.FK_Factura_Paciente" FromRole="Paciente" ToRole="Factura" />
+          <NavigationProperty Name="Historia_clinica" Relationship="Self.FK_Historia_clinica_Paciente" FromRole="Paciente" ToRole="Historia_clinica" />
+        </EntityType>
+        <EntityType Name="Procedimiento">
+          <Key>
+            <PropertyRef Name="codigo" />
+          </Key>
+          <Property Name="codigo" Type="String" Nullable="false" MaxLength="10" Unicode="true" FixedLength="true" />
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="precio" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="descripcion" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Historia_clinica" Relationship="Self.FK_Historia_clinica_Procedimiento" FromRole="Procedimiento" ToRole="Historia_clinica" />
+        </EntityType>
+        <EntityType Name="Procedimientos_realizados">
+          <Key>
+            <PropertyRef Name="idProcedimiento" />
+          </Key>
+          <Property Name="idProcedimiento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="codigoProcedimiento" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="codigoFactura" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Factura" Relationship="Self.FK_Factura_Procedimientos_realizados" FromRole="Procedimientos_realizados" ToRole="Factura" />
+        </EntityType>
+        <EntityType Name="Secretaria">
+          <Key>
+            <PropertyRef Name="idSecretaria" />
+          </Key>
+          <Property Name="idSecretaria" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="documento" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Empleado" Relationship="Self.FK_Secretaria_Empleado" FromRole="Secretaria" ToRole="Empleado" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK_Administrador_Empleado">
+          <End Role="Empleado" Type="Self.Empleado" Multiplicity="1" />
+          <End Role="Administrador" Type="Self.Administrador" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleado">
+              <PropertyRef Name="documento" />
+            </Principal>
+            <Dependent Role="Administrador">
+              <PropertyRef Name="documento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Empleado_Cargo">
+          <End Role="Cargo" Type="Self.Cargo" Multiplicity="1" />
+          <End Role="Empleado" Type="Self.Empleado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cargo">
+              <PropertyRef Name="codigoCargo" />
+            </Principal>
+            <Dependent Role="Empleado">
+              <PropertyRef Name="codigoCargo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cita_Odontologo">
+          <End Role="Odontologo" Type="Self.Odontologo" Multiplicity="1" />
+          <End Role="Cita" Type="Self.Cita" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Odontologo">
+              <PropertyRef Name="idOdontologo" />
+            </Principal>
+            <Dependent Role="Cita">
+              <PropertyRef Name="idOdontologo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cita_Paciente">
+          <End Role="Paciente" Type="Self.Paciente" Multiplicity="1" />
+          <End Role="Cita" Type="Self.Cita" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Paciente">
+              <PropertyRef Name="documento" />
+            </Principal>
+            <Dependent Role="Cita">
+              <PropertyRef Name="documentoPaciente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Odontologo_Empleado">
+          <End Role="Empleado" Type="Self.Empleado" Multiplicity="1" />
+          <End Role="Odontologo" Type="Self.Odontologo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleado">
+              <PropertyRef Name="documento" />
+            </Principal>
+            <Dependent Role="Odontologo">
+              <PropertyRef Name="documento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Secretaria_Empleado">
+          <End Role="Empleado" Type="Self.Empleado" Multiplicity="1" />
+          <End Role="Secretaria" Type="Self.Secretaria" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleado">
+              <PropertyRef Name="documento" />
+            </Principal>
+            <Dependent Role="Secretaria">
+              <PropertyRef Name="documento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Factura_Paciente">
+          <End Role="Paciente" Type="Self.Paciente" Multiplicity="0..1" />
+          <End Role="Factura" Type="Self.Factura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Paciente">
+              <PropertyRef Name="documento" />
+            </Principal>
+            <Dependent Role="Factura">
+              <PropertyRef Name="documentoPaciente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Factura_Procedimientos_realizados">
+          <End Role="Procedimientos_realizados" Type="Self.Procedimientos_realizados" Multiplicity="0..1" />
+          <End Role="Factura" Type="Self.Factura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Procedimientos_realizados">
+              <PropertyRef Name="idProcedimiento" />
+            </Principal>
+            <Dependent Role="Factura">
+              <PropertyRef Name="idProcedimiento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Historia_clinica_Paciente">
+          <End Role="Paciente" Type="Self.Paciente" Multiplicity="1" />
+          <End Role="Historia_clinica" Type="Self.Historia_clinica" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Paciente">
+              <PropertyRef Name="documento" />
+            </Principal>
+            <Dependent Role="Historia_clinica">
+              <PropertyRef Name="documentoPaciente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Historia_clinica_Procedimiento">
+          <End Role="Procedimiento" Type="Self.Procedimiento" Multiplicity="1" />
+          <End Role="Historia_clinica" Type="Self.Historia_clinica" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Procedimiento">
+              <PropertyRef Name="codigo" />
+            </Principal>
+            <Dependent Role="Historia_clinica">
+              <PropertyRef Name="codigoProcedimiento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="AcmeEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Administrador" EntityType="Self.Administrador" />
+          <EntitySet Name="Cargo" EntityType="Self.Cargo" />
+          <EntitySet Name="Cita" EntityType="Self.Cita" />
+          <EntitySet Name="Empleado" EntityType="Self.Empleado" />
+          <EntitySet Name="Factura" EntityType="Self.Factura" />
+          <EntitySet Name="Historia_clinica" EntityType="Self.Historia_clinica" />
+          <EntitySet Name="Odontologo" EntityType="Self.Odontologo" />
+          <EntitySet Name="Paciente" EntityType="Self.Paciente" />
+          <EntitySet Name="Procedimiento" EntityType="Self.Procedimiento" />
+          <EntitySet Name="Procedimientos_realizados" EntityType="Self.Procedimientos_realizados" />
+          <EntitySet Name="Secretaria" EntityType="Self.Secretaria" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <AssociationSet Name="FK_Administrador_Empleado" Association="Self.FK_Administrador_Empleado">
+            <End Role="Empleado" EntitySet="Empleado" />
+            <End Role="Administrador" EntitySet="Administrador" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Empleado_Cargo" Association="Self.FK_Empleado_Cargo">
+            <End Role="Cargo" EntitySet="Cargo" />
+            <End Role="Empleado" EntitySet="Empleado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cita_Odontologo" Association="Self.FK_Cita_Odontologo">
+            <End Role="Odontologo" EntitySet="Odontologo" />
+            <End Role="Cita" EntitySet="Cita" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cita_Paciente" Association="Self.FK_Cita_Paciente">
+            <End Role="Paciente" EntitySet="Paciente" />
+            <End Role="Cita" EntitySet="Cita" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Odontologo_Empleado" Association="Self.FK_Odontologo_Empleado">
+            <End Role="Empleado" EntitySet="Empleado" />
+            <End Role="Odontologo" EntitySet="Odontologo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Secretaria_Empleado" Association="Self.FK_Secretaria_Empleado">
+            <End Role="Empleado" EntitySet="Empleado" />
+            <End Role="Secretaria" EntitySet="Secretaria" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Factura_Paciente" Association="Self.FK_Factura_Paciente">
+            <End Role="Paciente" EntitySet="Paciente" />
+            <End Role="Factura" EntitySet="Factura" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Factura_Procedimientos_realizados" Association="Self.FK_Factura_Procedimientos_realizados">
+            <End Role="Procedimientos_realizados" EntitySet="Procedimientos_realizados" />
+            <End Role="Factura" EntitySet="Factura" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Historia_clinica_Paciente" Association="Self.FK_Historia_clinica_Paciente">
+            <End Role="Paciente" EntitySet="Paciente" />
+            <End Role="Historia_clinica" EntitySet="Historia_clinica" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Historia_clinica_Procedimiento" Association="Self.FK_Historia_clinica_Procedimiento">
+            <End Role="Procedimiento" EntitySet="Procedimiento" />
+            <End Role="Historia_clinica" EntitySet="Historia_clinica" />
+          </AssociationSet>
+          <FunctionImport Name="obtener_especialidad" ReturnType="Collection(AcmeModel.obtener_especialidad_Result)" />
+        </EntityContainer>
+        <ComplexType Name="obtener_especialidad_Result">
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="Documento" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Especialidad" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Telefono" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Correo" Nullable="true" MaxLength="50" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="AcmeModelStoreContainer" CdmEntityContainer="AcmeEntities">
+          <EntitySetMapping Name="Administrador">
+            <EntityTypeMapping TypeName="AcmeModel.Administrador">
+              <MappingFragment StoreEntitySet="Administrador">
+                <ScalarProperty Name="idAdmin" ColumnName="idAdmin" />
+                <ScalarProperty Name="documento" ColumnName="documento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cargo">
+            <EntityTypeMapping TypeName="AcmeModel.Cargo">
+              <MappingFragment StoreEntitySet="Cargo">
+                <ScalarProperty Name="codigoCargo" ColumnName="codigoCargo" />
+                <ScalarProperty Name="nombreCargo" ColumnName="nombreCargo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cita">
+            <EntityTypeMapping TypeName="AcmeModel.Cita">
+              <MappingFragment StoreEntitySet="Cita">
+                <ScalarProperty Name="codigo" ColumnName="codigo" />
+                <ScalarProperty Name="documentoPaciente" ColumnName="documentoPaciente" />
+                <ScalarProperty Name="idOdontologo" ColumnName="idOdontologo" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Empleado">
+            <EntityTypeMapping TypeName="AcmeModel.Empleado">
+              <MappingFragment StoreEntitySet="Empleado">
+                <ScalarProperty Name="documento" ColumnName="documento" />
+                <ScalarProperty Name="tipoDocumento" ColumnName="tipoDocumento" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="correo" ColumnName="correo" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="fechaNacimiento" ColumnName="fechaNacimiento" />
+                <ScalarProperty Name="codigoCargo" ColumnName="codigoCargo" />
+                <ScalarProperty Name="contrasena" ColumnName="contrasena" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Factura">
+            <EntityTypeMapping TypeName="AcmeModel.Factura">
+              <MappingFragment StoreEntitySet="Factura">
+                <ScalarProperty Name="codigo" ColumnName="codigo" />
+                <ScalarProperty Name="documentoPaciente" ColumnName="documentoPaciente" />
+                <ScalarProperty Name="idProcedimiento" ColumnName="idProcedimiento" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="valorTotal" ColumnName="valorTotal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Historia_clinica">
+            <EntityTypeMapping TypeName="AcmeModel.Historia_clinica">
+              <MappingFragment StoreEntitySet="Historia_clinica">
+                <ScalarProperty Name="idHistoria" ColumnName="idHistoria" />
+                <ScalarProperty Name="documentoPaciente" ColumnName="documentoPaciente" />
+                <ScalarProperty Name="codigoProcedimiento" ColumnName="codigoProcedimiento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Odontologo">
+            <EntityTypeMapping TypeName="AcmeModel.Odontologo">
+              <MappingFragment StoreEntitySet="Odontologo">
+                <ScalarProperty Name="idOdontologo" ColumnName="idOdontologo" />
+                <ScalarProperty Name="documento" ColumnName="documento" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="especialidad" ColumnName="especialidad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Paciente">
+            <EntityTypeMapping TypeName="AcmeModel.Paciente">
+              <MappingFragment StoreEntitySet="Paciente">
+                <ScalarProperty Name="documento" ColumnName="documento" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="tipoDocumento" ColumnName="tipoDocumento" />
+                <ScalarProperty Name="correo" ColumnName="correo" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="tipoSangre" ColumnName="tipoSangre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Procedimiento">
+            <EntityTypeMapping TypeName="AcmeModel.Procedimiento">
+              <MappingFragment StoreEntitySet="Procedimiento">
+                <ScalarProperty Name="codigo" ColumnName="codigo" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="precio" ColumnName="precio" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Procedimientos_realizados">
+            <EntityTypeMapping TypeName="AcmeModel.Procedimientos_realizados">
+              <MappingFragment StoreEntitySet="Procedimientos_realizados">
+                <ScalarProperty Name="idProcedimiento" ColumnName="idProcedimiento" />
+                <ScalarProperty Name="codigoProcedimiento" ColumnName="codigoProcedimiento" />
+                <ScalarProperty Name="codigoFactura" ColumnName="codigoFactura" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Secretaria">
+            <EntityTypeMapping TypeName="AcmeModel.Secretaria">
+              <MappingFragment StoreEntitySet="Secretaria">
+                <ScalarProperty Name="idSecretaria" ColumnName="idSecretaria" />
+                <ScalarProperty Name="documento" ColumnName="documento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="AcmeModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="obtener_especialidad" FunctionName="AcmeModel.Store.obtener_especialidad">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="AcmeModel.obtener_especialidad_Result">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Documento" ColumnName="Documento" />
+                <ScalarProperty Name="Especialidad" ColumnName="Especialidad" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Correo" ColumnName="Correo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

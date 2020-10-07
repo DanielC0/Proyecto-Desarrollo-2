@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="4bb10de432324542a44b0b4bbd42eacc" Name="Diagram1" ZoomLevel="94">
+        <EntityTypeShape EntityType="AcmeModel.Administrador" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="AcmeModel.Cargo" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AcmeModel.Cita" Width="1.5" PointX="7.5" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="AcmeModel.Empleado" Width="1.5" PointX="3" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="AcmeModel.Factura" Width="1.5" PointX="7.5" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="AcmeModel.Historia_clinica" Width="1.5" PointX="7.5" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="AcmeModel.Odontologo" Width="1.5" PointX="5.25" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="AcmeModel.Paciente" Width="1.5" PointX="5.25" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="AcmeModel.Procedimiento" Width="1.5" PointX="5.25" PointY="13.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="AcmeModel.Procedimientos_realizados" Width="1.5" PointX="5.25" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AcmeModel.Secretaria" Width="1.5" PointX="5.25" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="AcmeModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="AcmeModel.FK_Administrador_Empleado" ManuallyRouted="false" />
+        <AssociationConnector Association="AcmeModel.FK_Empleado_Cargo" ManuallyRouted="false" />
+        <AssociationConnector Association="AcmeModel.FK_Cita_Odontologo" ManuallyRouted="false" />
+        <AssociationConnector Association="AcmeModel.FK_Cita_Paciente" ManuallyRouted="false" />
+        <AssociationConnector Association="AcmeModel.FK_Odontologo_Empleado" ManuallyRouted="false" />
+        <AssociationConnector Association="AcmeModel.FK_Secretaria_Empleado" ManuallyRouted="false" />
+        <AssociationConnector Association="AcmeModel.FK_Factura_Paciente" ManuallyRouted="false" />
+        <AssociationConnector Association="AcmeModel.FK_Factura_Procedimientos_realizados" ManuallyRouted="false" />
+        <AssociationConnector Association="AcmeModel.FK_Historia_clinica_Paciente" ManuallyRouted="false" />
+        <AssociationConnector Association="AcmeModel.FK_Historia_clinica_Procedimiento" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
